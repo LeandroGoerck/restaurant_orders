@@ -4,11 +4,15 @@ from .importer import Importer
 class CsvImporter(Importer):
     @staticmethod
     def import_data(arquivo):
-        if ".csv" not in arquivo:
-            raise ValueError("Extensão inválida: '"+ arquivo + "'")
-        lines = []
-        with open(arquivo) as file:
-            for line in file.readlines():
-                lines.append(line)
+        print(arquivo)
+        if ".csv" not in str(arquivo):
+            raise FileNotFoundError("Extensão inválida: '"+ arquivo + "'")
 
-        return lines
+        lines = []
+        try: 
+            with open(arquivo) as file:
+                for line in file.readlines():
+                    lines.append(line)
+            return lines
+        except IOError:
+            raise FileNotFoundError("Arquivo inexistente: '"+arquivo+"'")

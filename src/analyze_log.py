@@ -5,6 +5,7 @@ from multiset import Multiset
 def analyze_log(path_to_file):
     lines = CsvImporter.import_data(path_to_file)
 
+    
     result = []
     orders_by_person= dict()
     days_ordered = dict()
