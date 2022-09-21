@@ -6,3 +6,4 @@ flake8==3.8.4
 black==20.8b1
 pytest-cov==2.10.1
 pubsub==0.1.2
+multiset==3.0.1
