@@ -19,6 +19,9 @@ class InventoryControl:
         self.orders = []
 
     def add_new_order(self, customer, order, day):
+        available_dishes = self.get_available_dishes()
+        if order not in available_dishes:
+            return False
         self.orders.append([customer, order, day])
 
     def get_quantities_to_buy(self):
@@ -36,3 +39,21 @@ class InventoryControl:
                 products_to_buy[item] += 1
 
         return products_to_buy
+
+    def get_available_dishes(self):
+
+        quantities_to_buy = self.get_quantities_to_buy()
+
+        cant_do_list = set()
+        all_product_list = set()
+        for product in self.INGREDIENTS:
+            for ingredient in self.INGREDIENTS[product]:
+                if (self.MINIMUM_INVENTORY[ingredient]
+                        - quantities_to_buy[ingredient]) <= 0:
+                    cant_do_list.add(product)
+
+                all_product_list.add(product)
+
+        can_do_list = all_product_list - cant_do_list
+
+        return can_do_list
