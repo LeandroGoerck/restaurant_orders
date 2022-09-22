@@ -44,16 +44,16 @@ class InventoryControl:
 
         quantities_to_buy = self.get_quantities_to_buy()
 
-        cant_do_list = set()
-        all_product_list = set()
+        cant_do = set()
+        all_products = set()
         for product in self.INGREDIENTS:
             for ingredient in self.INGREDIENTS[product]:
                 if (self.MINIMUM_INVENTORY[ingredient]
                         - quantities_to_buy[ingredient]) <= 0:
-                    cant_do_list.add(product)
+                    cant_do.add(product)
 
-                all_product_list.add(product)
+                all_products.add(product)
 
-        can_do_list = all_product_list - cant_do_list
+        can_do = all_products - cant_do
 
-        return can_do_list
+        return can_do
